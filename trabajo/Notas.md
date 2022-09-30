@@ -193,3 +193,33 @@ Ejemplo: [
     12.4,
     14
 ]
+
+## Foreach
+
+Foreach es como el for mejorado de java. Sirve para recorrer cualquier elemento iterable, sin necesidad de conocer su indexación.
+Por ejemplo:
+    foreach ($a as $k=>$v) {
+        echo $k . "=>" . $v;
+    }
+
+## Funciones útiles:
+* Asort
+* Arsort
+* Sort
+* Rsort
+* Ksort
+* Krsort
+
+Si queremos copiar un array es tan sencillo como hacer
+$a = $b;
+
+pero si queremos que ambas variables cambien cuando una de las dos sufra una modificación, tenemos que poner & al definir la nueva variable. Por ejemplo, $a = & $b;
+
+
+## Interpolación de cadenas. Expansión de variables.
+
+## Imprimir por pantalla
+* echo
+* print_r
+* var_dump
+
