@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+</head>
+<body>
+    <form action="calcauladora.php" method="get">
+        <label for="op1">Primer operando:</label>
+        <input type="text" name="op1" id="op1">
+        <label for="op2">Segundo operando:</label>
+        <input type="text" name="op2" id="op2">
+        <label for="operador">Operador:</label>
+        <select name="operador" id="operador">
+            <option value="suma">+</option>
+            <option value="resta">-</option>
+            <option value="multiplicar">*</option>
+            <option value="dividir">/</option>
+        </select>
+        <button type="submit">Calcular</button>
+    </form>
+</body>
+</html>
