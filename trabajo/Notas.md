@@ -223,3 +223,6 @@ pero si queremos que ambas variables cambien cuando una de las dos sufra una mod
 * print_r
 * var_dump
 
+
+# LUNES 03 DE OCTUBRE
+
