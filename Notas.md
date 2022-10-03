@@ -226,3 +226,7 @@ pero si queremos que ambas variables cambien cuando una de las dos sufra una mod
 
 # LUNES 03 DE OCTUBRE
 
+* Creación de funciones
+* Funciones globales
+* Return
+* Documentación
