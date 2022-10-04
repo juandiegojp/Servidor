@@ -1,24 +1,22 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AAA</title>
+    <title>Hamming</title>
 </head>
-
 <body>
     <?php
     require 'auxiliar.php';
-
-    $op1 = trim($_GET['op1']);
-    $op2 = trim($_GET['op2']);
-    $op = trim($_GET['op']);
-    $error = [];
-    $res = calcular_resultado($op1, $op2, $op, $error);
+    $op = trim($_GET['adn1']);
+    $cadena1 = trim($_GET['adn1']);
+    $cadena2 = trim($_GET['adn2']);
+    $error = null;
     
+    comprobar_cadenas($cadena1, $cadena2, $error);
     ?>
+    <p> <?= trim($_GET['adn1']); ?> </p>
+    <p> <?= $op ?> </p>
 </body>
-
 </html>

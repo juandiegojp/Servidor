@@ -17,7 +17,8 @@
      *                  Valores válidos ('+', '-', '*', '/')
      * @return mixed    El resultado del calculado.
      */
-    function calcular_resultado($oper1, $oper2, $oper) {
+
+    function calcular_resultado(float $oper1,float $oper2,string $oper): ?float {
         switch ($oper) {
             case '+':
                 $resul = $oper1 + $oper2;
@@ -36,17 +37,17 @@
                 break;
 
             default:
-                $resul = "No entiendo qué estás haciendo.";
+                $error[] = "Error: Operación incorrecta.";
                 break;
+                return null;
         }
 
         return $resul;
     }
 
-    $op1 = trim($_GET['op1']);
-    $op2 = trim($_GET['op2']);
-    $op = trim($_GET['op']);
 
-    $res = calcular_resultado($op1, $op2, $op);
+    function mostrar_errores(array $error): void
 
-    ?>
+    {
+        
+    }

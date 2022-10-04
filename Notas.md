@@ -230,3 +230,8 @@ pero si queremos que ambas variables cambien cuando una de las dos sufra una mod
 * Funciones globales
 * Return
 * Documentación
+
+
+# MARTES 04 DE OCTUBRE 
+
+* Error
