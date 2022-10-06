@@ -19,8 +19,8 @@
 
         
     <p> <?= $error ?> </p>
-    <p> <?= $cadena1 ?> </p>
-    <p> <?= $cadena2 ?> </p>
-    <p> <?= hamming($cadena1, $cadena2) ?> </p>
+    <p> Cadena 1: <?= $cadena1 ?> </p>
+    <p> Cadena 2: <?= $cadena2 ?> </p>
+    <p> Diferencias encontradas: <?= hamming($cadena1, $cadena2) ?> </p>
 </body>
 </html>

@@ -235,3 +235,24 @@ pero si queremos que ambas variables cambien cuando una de las dos sufra una mod
 # MARTES 04 DE OCTUBRE 
 
 * Error
+
+# JUEVES 6 DE OCTUBRE
+
+* Hamming. -> Tema de abstración y control del mismo.
+* Extract()
+* Compact()
+* array_pop()
+* array_shift()
+* array_unshift()
+* array_push()
+* array_sum()
+* suffke()
+* random()
+* array_reverse()
+* array_map()
+* array_reduce()
+* array_intersect()
+* array_diff()
+* array_splice()
+* array_key_exists()
+* 
