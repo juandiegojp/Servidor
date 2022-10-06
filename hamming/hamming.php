@@ -9,14 +9,18 @@
 <body>
     <?php
     require 'auxiliar.php';
-    $op = trim($_GET['adn1']);
-    $cadena1 = trim($_GET['adn1']);
-    $cadena2 = trim($_GET['adn2']);
+    $cadena1 = preg_replace('/\s+/', '', $_GET['adn1']);
+    $cadena2 = preg_replace('/\s+/', '', $_GET['adn2']);
     $error = null;
-    
-    comprobar_cadenas($cadena1, $cadena2, $error);
-    ?>
-    <p> <?= trim($_GET['adn1']); ?> </p>
-    <p> <?= $op ?> </p>
+
+    /* if (comprobar_cadenas($cadena1, $cadena2, $error)) {?> 
+        <p> <?= "funcionaa??" ?> </p> <?php
+    } */ ?>
+
+        
+    <p> <?= $error ?> </p>
+    <p> <?= $cadena1 ?> </p>
+    <p> <?= $cadena2 ?> </p>
+    <p> <?= hamming($cadena1, $cadena2) ?> </p>
 </body>
 </html>
