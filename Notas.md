@@ -298,4 +298,6 @@ pero si queremos que ambas variables cambien cuando una de las dos sufra una mod
 * Throwable
             { Exception
             ErrorException
-* 
+
+* Los errores se podrían capturar con un try sin problema.
+* ValueError: ejemplo.
