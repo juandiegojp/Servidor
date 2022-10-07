@@ -283,3 +283,19 @@ pero si queremos que ambas variables cambien cuando una de las dos sufra una mod
     * 'P' es necesario siempre, mientras que 'T' solo es necesario para HORAS, MINUTOS Y SEGUNDOS.
     * 'P4MT4M'  Aquí se diferencia los cuatro meses de los 4 minutos gracias a la T. Que es la que ayuda a diferenciar para darle el formato al intervalo.
 
+
+* $nueva = $fecha;
+* $nueva = &$fecha;
+* $nueva = clone $fecha;
+
+
+### Excepciones
+
+* Function set_error_handler
+* Error_reporting()
+            { Error
+            TypeError(ArgumentError), ArithmeticError (DivisionByZeroError)
+* Throwable
+            { Exception
+            ErrorException
+* 
