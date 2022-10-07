@@ -255,4 +255,31 @@ pero si queremos que ambas variables cambien cuando una de las dos sufra una mod
 * array_diff()
 * array_splice()
 * array_key_exists()
-* 
+* array_splice()
+
+
+# VIERNES 7 DE OCTUBRE
+
+## Orientación a objetos
+
+### función date/time.
+
+*Función time() duelve el tiempo unix (1/1/70 00:00:00 UTC).
+*Fucnión date() da formato a una fecha en tiempo unix.
+*Formato ISO Y-m-d H:i:s     (Año, mes, día  Hora, minuto, segundos)
+*Con la 'e' dentro del formato puedes añadir la zona horaria en la que estamos.
+*En nuestro caso debe de ser UTC.
+
+### Datetime
+
+* $fecha = new DateTime();
+  * $fecha -> getTimezone();  Duelve la zona horaria.
+  * new DateTimeZone('Europe/Madrid'); -> Devuelve la zona horaria.
+  * $fecha->setTimezone(new DateTimeZone('Europe/Madrid')); // Modifica la zona horaria a la de Europa/Madrid.
+  * $dos_dias = new DateInterval('P2D'); // se crea el intervalo para dos días en adelante.
+  * $fecha->add($dos_dias); // Modifica la fecha actual a dos días en adelante.
+    * 'P2D' Dos días
+    * 'T2M' Dos minutos
+    * 'P' es necesario siempre, mientras que 'T' solo es necesario para HORAS, MINUTOS Y SEGUNDOS.
+    * 'P4MT4M'  Aquí se diferencia los cuatro meses de los 4 minutos gracias a la T. Que es la que ayuda a diferenciar para darle el formato al intervalo.
+
