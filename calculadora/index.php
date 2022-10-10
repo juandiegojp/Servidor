@@ -12,18 +12,16 @@
     <?php
     require 'auxiliar.php';
 
-    $op1 = trim($_GET['op1']);
-    $op2 = trim($_GET['op2']);
-    $op = trim($_GET['op']);
-    $error = [];
-    $res = calcular_resultado($op1, $op2, $op, $error);
-
-    if (empty($error)) {
+    $op = (isset($_GET['op'])) ? trim($_GET['op']) : null;
+    $op1 = (isset($_GET['op1'])) ? trim($_GET['op1']) : null;
+    $op2 = (isset($_GET['op2'])) ? trim($_GET['op2']) : null;
+    
+    if (isset($op1, $op2, $op)) {
+        $res = calcular_resultado($op1, $op2, $op);
         mostrar_resultado($op1, $op2, $op, $res);
-    } else {
-        mostrar_errores($error);
     }
     ?>
+
     <form action="" method="get">
         <div>
             <label>
