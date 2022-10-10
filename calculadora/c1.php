@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -5,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AAA</title>
+    <title>Resultado</title>
 </head>
 
 <body>
@@ -17,7 +18,12 @@
     $op = trim($_GET['op']);
     $error = [];
     $res = calcular_resultado($op1, $op2, $op, $error);
-    
+
+    if (empty($error)) {
+        mostrar_resultado($op1, $op2, $op, $res);
+    } else {
+        mostrar_errores($error);
+    }
     ?>
 </body>
 
