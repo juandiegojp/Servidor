@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -25,6 +24,27 @@
         mostrar_errores($error);
     }
     ?>
+    <form action="" method="get">
+        <div>
+            <label>
+                Primer operando:
+                <input type="text" name="op1">
+            </label>
+        </div>
+        <div>
+            <label>
+                Segundo operando:
+                <input type="text" name="op2">
+            </label>
+        </div>
+        <div>
+            <label>
+                Operación:
+                <input type="text" name="op">
+            </label>
+        </div>
+        <button type="submit">Calcular</button>
+    </form>
 </body>
 
 </html>
