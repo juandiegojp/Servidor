@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,13 +13,17 @@
     <?php
     require 'auxiliar.php';
 
-    $op = (isset($_GET['op'])) ? trim($_GET['op']) : null;
     $op1 = (isset($_GET['op1'])) ? trim($_GET['op1']) : null;
     $op2 = (isset($_GET['op2'])) ? trim($_GET['op2']) : null;
-    
+    $op = (isset($_GET['op'])) ? trim($_GET['op']) : null;
+
     if (isset($op1, $op2, $op)) {
-        $res = calcular_resultado($op1, $op2, $op);
-        mostrar_resultado($op1, $op2, $op, $res);
+        try {
+            $res = calcular_resultado($op1, $op2, $op);
+            mostrar_resultado($op1, $op2, $op, $res);
+        } catch (Exception $e) {
+            mostrar_errores([$e->getMessage()]);
+        }
     }
     ?>
 
