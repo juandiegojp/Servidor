@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author Ricardo Pérez López
  * @copyright Copyright (c) 2022 Ricardo Pérez López
@@ -46,10 +47,10 @@ function mostrar_errores(array $error): void
 {
     foreach ($error as $err) { ?>
         <p><?= $err ?></p><?php
-    }
-}
+                        }
+                    }
 
-function mostrar_resultado($op1, $op2, $op, $res)
-{ ?>
+                    function mostrar_resultado($op1, $op2, $op, $res)
+                    { ?>
     <p>El resultado de <?= "$op1 $op $op2" ?> es <?= $res ?>.</p><?php
-}
+                                                                }
