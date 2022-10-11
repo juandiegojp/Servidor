@@ -324,3 +324,14 @@ Comenzamos por la tabla departamento. Tendrá un campo **ID** el cual será un *
 La base de datos la creamos dentro de un directorio con el mismo nombre de la base de datos y bajo la extensión .sql.
 
 Una vez esté creada, usamos el comando `psql -h localhost -d empresa -U empresa < empresa.sql`. Esto debe de hacerse dentro de la carpeta donde se encuentra el archivo de la base de datos.
+
+¡IMPORTANTE! CAMBIAR LOS PERMISOS CON `SUDO CHMOD A+RWX`.
+
+Pasamos ahora a instalar el paquete de postgresql de PHP. Para ello usamos el comando `sudo apt install php8.1-pgsql`. En realidad hemos cogido todos los del Moodle al final, lol.
+
+Creamos un nuevo archivo .php en el cual vamos a crear la variable $pdo. En esa variable vamos a poner `new PDO('pgsql:host=localhost;dbname=empresa', 'empresa', 'empresa');`.
+
+`$sent = $pdo->query('select * from departamentos');` Esto sirve para crear una sentencia y "almacenar" todos los resultados que fueran a devolver dentro de una sentencia.
+`$fila = $sent->fetch();` Fetch devuelve una fila. PDO::FETCH_OBJ convierte en objeto.
+`//var_dump($fila);`
+`print_r($fila);`
