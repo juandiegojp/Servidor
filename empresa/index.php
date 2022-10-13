@@ -9,6 +9,7 @@
         table {
             border-collapse: collapse;
             text-align: center;
+            margin: auto;
         }
 
         td, th {
@@ -21,34 +22,53 @@
 
 <body>
     <?php
+    $codigo = (isset($_GET['codigo'])) ? trim($_GET['codigo']) : null;
+    ?>
+
+    <div>
+        <form action="" method="get">
+            <label>Código
+            <input type="text" size="8" name="codigo" id="codigo" value="<?= $codigo ?>">
+            </label>
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
+    <?php
     $pdo = new PDO('pgsql:host=localhost;dbname=empresa', 'empresa', 'empresa');
-    $sent = $pdo->query('select * from departamentos ORDER BY codigo');
-
-    $fila = $sent->fetchAll();
-    //var_dump($fila);
-
-    //print_r($fila);
+    $pdo->beginTransaction();
+    $sent = $pdo->query('LOCK TABLE departamentos IN SHARE MODE');
+    $sent = $pdo->prepare('SELECT COUNT(*) 
+                            FROM departamentos 
+                            WHERE codigo = :codigo');
+    $sent->execute([':codigo' => $codigo]);
+    $total = $sent->fetchColumn();
+    $sent = $pdo->prepare('SELECT * 
+                        FROM departamentos
+                        WHERE codigo = :codigo
+                        ORDER BY codigo');
+    $sent->execute([':codigo' => $codigo]);
+    $pdo->commit();
     ?>
     <table>
         <caption>Base de Datos: Empresa</caption>
         <thead>
             <tr>
-                <th>ID</th>
+                
                 <th>Código</th>
                 <th>Denominación</th>
             </tr>
         </thead>
 
         <tbody>
+            <?php foreach ($sent as $filas) { ?>    
             <tr>
-                <?php foreach ($fila as $filas) { ?>
-                    <td> <?php echo $filas['id']; ?> </td>
                     <td> <?php echo $filas['codigo']; ?> </td>
                     <td> <?php echo $filas['denominacion']; ?> </td>
             </tr>
         <?php } ?>
         </tbody>
     </table>
+    <?php  ?>
+    <p> Número total de filas: <?php echo $total ?> </p>
 </body>
-
 </html>

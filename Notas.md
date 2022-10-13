@@ -335,3 +335,14 @@ Creamos un nuevo archivo .php en el cual vamos a crear la variable $pdo. En esa 
 `$fila = $sent->fetch();` Fetch devuelve una fila. PDO::FETCH_OBJ convierte en objeto.
 `//var_dump($fila);`
 `print_r($fila);`
+
+
+# JUEVES 13 DE OCTUBRE
+Read commit
+SERIALIZABLE
+beginTransition
+$pdo->query('SET TRANSACTION ISOLATION LEVEL SERIALIZABLE')
+$pdo->query('LOCK TABLE departamentos IN SHARE MODE')
+
+cuando las consultas son constantes, se usa query
+si son parametrizadas, se usa prepare y execute.
