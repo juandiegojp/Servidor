@@ -22,13 +22,17 @@
 
 <body>
     <?php
-    $codigo = (isset($_GET['codigo'])) ? trim($_GET['codigo']) : null;
+    $codigo1 = (isset($_GET['codigo1'])) ? trim($_GET['codigo1']) : null;
+    $codigo2 = (isset($_GET['codigo2'])) ? trim($_GET['codigo2']) : null;
     ?>
 
     <div>
         <form action="" method="get">
-            <label>Código
-            <input type="text" size="8" name="codigo" id="codigo" value="<?= $codigo ?>">
+            <label>Desde Código
+            <input type="text" size="8" name="codigo1" id="codigo1" value="<?= $codigo1 ?>">
+            </label>
+            <label>Hasta Código
+            <input type="text" size="8" name="codigo2" id="codigo2" value="<?= $codigo2 ?>">
             </label>
             <button type="submit">Buscar</button>
         </form>
@@ -39,14 +43,14 @@
     $sent = $pdo->query('LOCK TABLE departamentos IN SHARE MODE');
     $sent = $pdo->prepare('SELECT COUNT(*) 
                             FROM departamentos 
-                            WHERE codigo = :codigo');
-    $sent->execute([':codigo' => $codigo]);
+                            WHERE codigo <= :codigo2 AND codigo >= :codigo1');
+    $sent->execute([':codigo1' => $codigo1,':codigo2' => $codigo2]);
     $total = $sent->fetchColumn();
     $sent = $pdo->prepare('SELECT * 
                         FROM departamentos
-                        WHERE codigo = :codigo
+                        WHERE codigo <= :codigo2 AND codigo >= :codigo1
                         ORDER BY codigo');
-    $sent->execute([':codigo' => $codigo]);
+    $sent->execute([':codigo1' => $codigo1,':codigo2' => $codigo2]);
     $pdo->commit();
     ?>
     <table>
