@@ -346,3 +346,15 @@ $pdo->query('LOCK TABLE departamentos IN SHARE MODE')
 
 cuando las consultas son constantes, se usa query
 si son parametrizadas, se usa prepare y execute.
+
+
+# VIERNES 14 DE OCTUBRE
+
+* Corregir errores de "empresa.sql"
+* SQL: traslate.
+* null puede ser tomado como ''. Entonces, para verificarlo en un if, se podría hacer con un != ''.
+
+
+dinámica: prepare / execute
+estática: - devuelve filas: query
+          - *no* devuelve filas: exec

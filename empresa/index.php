@@ -12,6 +12,12 @@
             margin: auto;
         }
 
+        fieldset {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
         td, th {
             border: 1px solid black;
             padding: 20px;
@@ -22,19 +28,27 @@
 
 <body>
     <?php
+
     $codigo1 = (isset($_GET['codigo1'])) ? trim($_GET['codigo1']) : null;
     $codigo2 = (isset($_GET['codigo2'])) ? trim($_GET['codigo2']) : null;
+    $denominacion = (isset($_GET['denominacion'])) ? trim($_GET['denominacion']) : null;
     ?>
 
     <div>
         <form action="" method="get">
-            <label>Desde Código
-            <input type="text" size="8" name="codigo1" id="codigo1" value="<?= $codigo1 ?>">
-            </label>
-            <label>Hasta Código
-            <input type="text" size="8" name="codigo2" id="codigo2" value="<?= $codigo2 ?>">
-            </label>
-            <button type="submit">Buscar</button>
+            <fieldset>
+                <legend>Criterios de búsqueda: </legend>
+                <label>Desde Código
+                    <input type="text" size="8" name="codigo1" id="codigo1" value="<?= $codigo1 ?>">
+                </label>
+                <label>Hasta Código
+                    <input type="text" size="8" name="codigo2" id="codigo2" value="<?= $codigo2 ?>">
+                </label>
+                <label>Denominación
+                    <input type="text" size="8" name="denominacion" id="denominacion" value="<?= $denominacion ?>">
+                </label>
+                <button type="submit">Buscar</button>
+            </fieldset>
         </form>
     </div>
     <?php
@@ -43,14 +57,16 @@
     $sent = $pdo->query('LOCK TABLE departamentos IN SHARE MODE');
     $sent = $pdo->prepare('SELECT COUNT(*) 
                             FROM departamentos 
-                            WHERE codigo <= :codigo2 AND codigo >= :codigo1');
-    $sent->execute([':codigo1' => $codigo1,':codigo2' => $codigo2]);
+                            WHERE codigo <= :codigo2 AND codigo >= :codigo1 
+                            AND denominacion = :denominacion');
+    $sent->execute([':codigo1' => $codigo1,':codigo2' => $codigo2, ':denominacion' => $denominacion]);
     $total = $sent->fetchColumn();
     $sent = $pdo->prepare('SELECT * 
                         FROM departamentos
-                        WHERE codigo <= :codigo2 AND codigo >= :codigo1
+                        WHERE codigo <= :codigo2 AND codigo >= :codigo1 
+                        AND denominacion = :denominacion
                         ORDER BY codigo');
-    $sent->execute([':codigo1' => $codigo1,':codigo2' => $codigo2]);
+    $sent->execute([':codigo1' => $codigo1,':codigo2' => $codigo2, ':denominacion' => $denominacion]);
     $pdo->commit();
     ?>
     <table>
