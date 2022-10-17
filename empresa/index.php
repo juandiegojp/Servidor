@@ -5,48 +5,37 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        table {
-            border-collapse: collapse;
-            text-align: center;
-            margin: auto;
-        }
-
-        fieldset {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        td, th {
-            border: 1px solid black;
-            padding: 20px;
-        }
-    </style>
     <title>Base de datos</title>
 </head>
 
 <body>
-    <?php
-
-    $codigo1 = (isset($_GET['codigo1'])) ? trim($_GET['codigo1']) : null;
-    $codigo2 = (isset($_GET['codigo2'])) ? trim($_GET['codigo2']) : null;
-    $denominacion = (isset($_GET['denominacion'])) ? trim($_GET['denominacion']) : null;
+<?php
+    $desde_codigo = isset($_GET['desde_codigo']) ? trim($_GET['desde_codigo']) : null;
+    $hasta_codigo = isset($_GET['hasta_codigo']) ? trim($_GET['hasta_codigo']) : null;
+    $denominacion = isset($_GET['denominacion']) ? trim($_GET['denominacion']) : null;
     ?>
-
     <div>
         <form action="" method="get">
             <fieldset>
-                <legend>Criterios de búsqueda: </legend>
-                <label>Desde Código
-                    <input type="text" size="8" name="codigo1" id="codigo1" value="<?= $codigo1 ?>">
-                </label>
-                <label>Hasta Código
-                    <input type="text" size="8" name="codigo2" id="codigo2" value="<?= $codigo2 ?>">
-                </label>
-                <label>Denominación
-                    <input type="text" size="8" name="denominacion" id="denominacion" value="<?= $denominacion ?>">
-                </label>
+                <legend>Criterios de búsqueda</legend>
+                <p>
+                    <label>
+                        Desde código:
+                        <input type="text" name="desde_codigo" size="8" value="<?= $desde_codigo ?>">
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        Hasta código:
+                        <input type="text" name="hasta_codigo" size="8" value="<?= $hasta_codigo ?>">
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        Denominación:
+                        <input type="text" name="denominacion" value="<?= $denominacion ?>">
+                    </label>
+                </p>
                 <button type="submit">Buscar</button>
             </fieldset>
         </form>
@@ -54,41 +43,48 @@
     <?php
     $pdo = new PDO('pgsql:host=localhost;dbname=empresa', 'empresa', 'empresa');
     $pdo->beginTransaction();
-    $sent = $pdo->query('LOCK TABLE departamentos IN SHARE MODE');
-    $sent = $pdo->prepare('SELECT COUNT(*) 
-                            FROM departamentos 
-                            WHERE codigo <= :codigo2 AND codigo >= :codigo1 
-                            AND denominacion = :denominacion');
-    $sent->execute([':codigo1' => $codigo1,':codigo2' => $codigo2, ':denominacion' => $denominacion]);
+    $pdo->exec('LOCK TABLE departamentos IN SHARE MODE');
+    $where = [];
+    $execute = [];
+    if (isset($desde_codigo) && $desde_codigo != '') {
+        $where[] = 'codigo >= :desde_codigo';
+        $execute[':desde_codigo'] = $desde_codigo;
+    }
+    if (isset($hasta_codigo) && $hasta_codigo != '') {
+        $where[] = 'codigo <= :hasta_codigo';
+        $execute[':hasta_codigo'] = $hasta_codigo;
+    }
+    if (isset($denominacion) && $denominacion != '') {
+        $where[] = 'lower(denominacion) LIKE lower(:denominacion)';
+        $execute[':denominacion'] = "%$denominacion%";
+    }
+    $where = !empty($where) ? 'WHERE ' . implode(' AND ', $where) : '';
+    $sent = $pdo->prepare("SELECT COUNT(*) FROM departamentos $where");
+    $sent->execute($execute);
     $total = $sent->fetchColumn();
-    $sent = $pdo->prepare('SELECT * 
-                        FROM departamentos
-                        WHERE codigo <= :codigo2 AND codigo >= :codigo1 
-                        AND denominacion = :denominacion
-                        ORDER BY codigo');
-    $sent->execute([':codigo1' => $codigo1,':codigo2' => $codigo2, ':denominacion' => $denominacion]);
+    $sent = $pdo->prepare("SELECT * FROM departamentos $where ORDER BY codigo");
+    $sent->execute($execute);
     $pdo->commit();
     ?>
-    <table>
-        <caption>Base de Datos: Empresa</caption>
-        <thead>
-            <tr>
-                
+    <br>
+    <div>
+        <table style="margin: auto" border="1">
+            <thead>
                 <th>Código</th>
                 <th>Denominación</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <?php foreach ($sent as $filas) { ?>    
-            <tr>
-                    <td> <?php echo $filas['codigo']; ?> </td>
-                    <td> <?php echo $filas['denominacion']; ?> </td>
-            </tr>
-        <?php } ?>
-        </tbody>
-    </table>
-    <?php  ?>
-    <p> Número total de filas: <?php echo $total ?> </p>
+                <th>Acciones</th>
+            </thead>
+            <tbody>
+                <?php foreach ($sent as $fila): ?>
+                    <tr>
+                        <td><?= $fila['codigo'] ?></td>
+                        <td><?= $fila['denominacion'] ?></td>
+                        <td><a href="confirmar_borrado.php?id=<?= $fila['id'] ?>">Borrar</a></td>
+                    </tr>
+                <?php endforeach ?>
+            </tbody>
+        </table>
+        <p>Número total de filas: <?= $total ?></p>
+    </div>
 </body>
 </html>
