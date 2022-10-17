@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Base de datos</title>
+    <title>Departamentos</title>
 </head>
-
 <body>
     <?php
     require 'auxiliar.php';
-    $desde_codigo = isset($_GET['desde_codigo']) ? trim($_GET['desde_codigo']) : null;
-    $hasta_codigo = isset($_GET['hasta_codigo']) ? trim($_GET['hasta_codigo']) : null;
-    $denominacion = isset($_GET['denominacion']) ? trim($_GET['denominacion']) : null;
+
+    $desde_codigo = obtener_get('desde_codigo');
+    $hasta_codigo = obtener_get('hasta_codigo');
+    $denominacion = obtener_get('denominacion');
     ?>
     <div>
         <form action="" method="get">
@@ -76,7 +75,7 @@
                 <th>Acciones</th>
             </thead>
             <tbody>
-                <?php foreach ($sent as $fila) : ?>
+                <?php foreach ($sent as $fila): ?>
                     <tr>
                         <td><?= $fila['codigo'] ?></td>
                         <td><?= $fila['denominacion'] ?></td>
@@ -86,7 +85,7 @@
             </tbody>
         </table>
         <p>Número total de filas: <?= $total ?></p>
+        <a href="insertar_departamento.php">Insertar un nuevo departamento</a>
     </div>
 </body>
-
 </html>

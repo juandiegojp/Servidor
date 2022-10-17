@@ -1,7 +1,8 @@
 <?php
+
 require 'auxiliar.php';
 
-$id = isset($_POST['id']) ? trim($_POST['id']) : null;
+$id = obtener_post('id');
 
 if (!isset($id)) {
     return volver();
@@ -10,4 +11,4 @@ if (!isset($id)) {
 $pdo = conectar();
 $sent = $pdo->prepare("DELETE FROM departamentos WHERE id = :id");
 $sent->execute([':id' => $id]);
-return volver();
+volver();
