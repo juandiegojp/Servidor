@@ -358,3 +358,24 @@ si son parametrizadas, se usa prepare y execute.
 dinámica: prepare / execute
 estática: - devuelve filas: query
           - *no* devuelve filas: exec
+
+
+# LUNES 17 DE OCTUBRE
+
+Hemos creado el *borrar.php*, además del *auxiliar.php*. Hemos creado funciones como **volver** con el header(location: index.php) y conectar() para así no repetir tanto las mismas líneas de código.
+
+En código "puramente php" no es necesario hacer un return. En el caso de los headers, sí lo es. Ya que, en resumen, puede dar problemas en un futuro si no se hace correctamente. Se hace y coloca un return después de crearlo y nos olvidamos. 
+
+El borrado lo hemos hecho mediante **POST** importante eso.
+
+SQL ---- PHP
+NULL -- nulll
+bool -- bool
+enteros
+
+| SQL   | PHP |
+|---|---|
+| NULL   | NULL  |
+|  bool | bool  |
+| enteros  |  int |
+| 'resto'  |  string |

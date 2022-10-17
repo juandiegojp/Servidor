@@ -9,7 +9,8 @@
 </head>
 
 <body>
-<?php
+    <?php
+    require 'auxiliar.php';
     $desde_codigo = isset($_GET['desde_codigo']) ? trim($_GET['desde_codigo']) : null;
     $hasta_codigo = isset($_GET['hasta_codigo']) ? trim($_GET['hasta_codigo']) : null;
     $denominacion = isset($_GET['denominacion']) ? trim($_GET['denominacion']) : null;
@@ -41,7 +42,7 @@
         </form>
     </div>
     <?php
-    $pdo = new PDO('pgsql:host=localhost;dbname=empresa', 'empresa', 'empresa');
+    $pdo = conectar();
     $pdo->beginTransaction();
     $pdo->exec('LOCK TABLE departamentos IN SHARE MODE');
     $where = [];
@@ -75,7 +76,7 @@
                 <th>Acciones</th>
             </thead>
             <tbody>
-                <?php foreach ($sent as $fila): ?>
+                <?php foreach ($sent as $fila) : ?>
                     <tr>
                         <td><?= $fila['codigo'] ?></td>
                         <td><?= $fila['denominacion'] ?></td>
@@ -87,4 +88,5 @@
         <p>Número total de filas: <?= $total ?></p>
     </div>
 </body>
+
 </html>
