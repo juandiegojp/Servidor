@@ -373,9 +373,9 @@ NULL -- nulll
 bool -- bool
 enteros
 
-| SQL   | PHP |
-|---|---|
-| NULL   | NULL  |
-|  bool | bool  |
-| enteros  |  int |
-| 'resto'  |  string |
+| SQL     | PHP    |
+| ------- | ------ |
+| NULL    | NULL   |
+| bool    | bool   |
+| enteros | int    |
+| 'resto' | string |
