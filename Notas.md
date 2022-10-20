@@ -379,3 +379,15 @@ enteros
 | bool    | bool   |
 | enteros | int    |
 | 'resto' | string |
+
+
+# JUEVES 20 DE OCTUBRE
+
+Filter validate.
+
+Válido y útil para los input, valor int, etc. 
+
+https://www.php.net/manual/en/book.filter
+
+Debería de echarle un ojo. Es bastante necesario.
+
