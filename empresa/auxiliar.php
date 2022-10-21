@@ -46,6 +46,14 @@ function filtrar_codigo($codigo, &$error)
             $error
         );
     }
+
+    filter_var($codigo, FILTER_VALIDATE_INT, [
+        'options' => [
+            'min_range' => 0,
+            'max_range' => 99,
+        ]
+    ]);
+
     if (!isset($error['codigo'])) {
         $pdo = conectar();
         $sent = $pdo->prepare("SELECT COUNT(*)
@@ -91,19 +99,14 @@ function insertar_departamento($codigo, $denominacion)
     ]);
 }
 
-function mostrar_errores($error)
+function mostrar_errores($campo, $error)
 {
-    foreach ($error as $campo => $mensajes) { ?>
-        <ul>
-            <li>
-                Errores del campo <?= $campo ?><?php
-                                                foreach ($mensajes as $mensaje) { ?>
-                <ul>
-                    <li><?= $mensaje ?></li>
-                </ul><?php
-                                                } ?>
-            </li>
-        </ul><?php
+    if (isset($error[$campo])) {
+        foreach ($error[$campo] as $mensaje) { ?>
+            <ul <?= css_error($campo, $error) ?>>
+                <li><?= $mensaje ?></li>
+            </ul><?php
+                }
             }
         }
 
@@ -119,4 +122,14 @@ function mostrar_errores($error)
             if (!empty($error)) {
                 throw new Exception();
             }
+        }
+
+        function css_error($campo, $error)
+        {
+            return isset($error[$campo]) ? 'class="error"' : '';
+        }
+
+        function css_campo_error($campo, $error)
+        {
+            return isset($error[$campo]) ? 'class="campo-error"' : '';
         }
