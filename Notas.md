@@ -391,3 +391,9 @@ https://www.php.net/manual/en/book.filter
 
 Debería de echarle un ojo. Es bastante necesario.
 
+
+# VIERNES 21 DE OCTUBRE
+
+filter_input
+'options' => function($x) use (&$error) { ... }
+
