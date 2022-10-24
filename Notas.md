@@ -399,3 +399,6 @@ filter_input
 
 
 # LUNES 24 DE OCTUBRE
+- modificar.php 
+* cambiar el set: update de las columnas que realmente hayan cambiado. Por ejemplo, si solo se modifica los valores de codigo, solo se modificia codigo.
+* obtener codigo - refactorizar
