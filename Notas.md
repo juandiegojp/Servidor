@@ -397,3 +397,5 @@ Debería de echarle un ojo. Es bastante necesario.
 filter_input
 'options' => function($x) use (&$error) { ... }
 
+
+# LUNES 24 DE OCTUBRE

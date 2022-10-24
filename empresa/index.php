@@ -74,7 +74,7 @@
             <thead>
                 <th>Código</th>
                 <th>Denominación</th>
-                <th>Acciones</th>
+                <th colspan="2">Acciones</th>
             </thead>
             <tbody>
                 <?php foreach ($sent as $fila) : ?>
@@ -82,6 +82,7 @@
                         <td><?= $fila['codigo'] ?></td>
                         <td><?= $fila['denominacion'] ?></td>
                         <td><a href="confirmar_borrado.php?id=<?= $fila['id'] ?>">Borrar</a></td>
+                        <td><a href="modificar.php?id=<?= $fila['id'] ?>">Modificar</a></td>
                     </tr>
                 <?php endforeach ?>
             </tbody>

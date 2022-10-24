@@ -5,34 +5,35 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Insertar un nuevo departamento</title>
-    <style>
-        .error {
-            font-size: small;
-            color: red;
-        }
-
-        .campo-error {
-            color: red;
-            border-color: red;
-        }
-    </style>
+    <title>Modificar un departamento</title>
 </head>
 
 <body>
     <?php
     require 'auxiliar.php';
 
-    try {
-        $error = [];
-        $codigo = obtener_codigo($error);
-        $denominacion = obtener_denominacion($error);
-        comprobar_errores($error);
-        insertar_departamento($codigo, $denominacion);
+    $id = obtener_get('id');
+
+    if (!isset($id)) {
         return volver();
-    } catch (Exception $e) {
-        // Vacío
     }
+
+    $error = [];
+    $codigo = obtener_codigo($error);
+    $denominacion = obtener_denominacion($error);
+
+    $pdo = conectar();
+    $sent = $pdo->prepare("SELECT codigo, denominacion
+                             FROM departamentos
+                            WHERE id = :id");
+    $sent->execute([':id' => $id]);
+    $fila = $sent->fetch();
+
+    if (empty($fila)) {
+        return volver();
+    }
+
+    extract($fila);
     ?>
     <div>
         <form action="" method="post">
@@ -51,7 +52,7 @@
                 <?php mostrar_errores('denominacion', $error) ?>
             </div>
             <div>
-                <button type="submit">Insertar</button>
+                <button type="submit">Modificar</button>
                 <a href="index.php">Cancelar</a>
             </div>
         </form>

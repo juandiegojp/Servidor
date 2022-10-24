@@ -28,10 +28,63 @@ function obtener_parametro($par, $array)
     return isset($array[$par]) ? trim($array[$par]) : null;
 }
 
+function obtener_codigo(&$error)
+{
+    return filter_input(INPUT_POST, 'codigo', FILTER_CALLBACK, [
+        'options' => function ($x) use (&$error) {
+            $long = mb_strlen($x);
+            if ($long < 1 || $long > 2) {
+                insertar_error(
+                    'codigo',
+                    'La longitud del código es incorrecta',
+                    $error
+                );
+            }
+            if (!ctype_digit($x)) {
+                insertar_error(
+                    'codigo',
+                    'Los caracteres del código no son válidos',
+                    $error
+                );
+            }
+            if (empty($error['codigo'])) {
+                $pdo = conectar();
+                $sent = $pdo->prepare("SELECT COUNT(*)
+                                         FROM departamentos
+                                        WHERE codigo = :codigo");
+                $sent->execute([':codigo' => $x]);
+                $cuantos = $sent->fetchColumn();
+                if ($cuantos !== 0) {
+                    insertar_error('codigo', 'El código ya existe', $error);
+                }
+            }
+
+            return $x;
+        }
+    ]);
+}
+
+function obtener_denominacion(&$error)
+{
+    return filter_input(INPUT_POST, 'denominacion', FILTER_CALLBACK, [
+        'options' => function ($x) use (&$error) {
+            $long = mb_strlen($x);
+            if ($long < 1 || $long > 255) {
+                insertar_error(
+                    'denominacion',
+                    'La longitud de la denominación es incorrecta',
+                    $error
+                );
+            }
+            return $x;
+        }
+    ]);
+}
+
+/*
 function filtrar_codigo($codigo, &$error)
 {
     $long = mb_strlen($codigo);
-
     if ($long < 1 || $long > 2) {
         insertar_error(
             'codigo',
@@ -46,14 +99,6 @@ function filtrar_codigo($codigo, &$error)
             $error
         );
     }
-
-    filter_var($codigo, FILTER_VALIDATE_INT, [
-        'options' => [
-            'min_range' => 0,
-            'max_range' => 99,
-        ]
-    ]);
-
     if (!isset($error['codigo'])) {
         $pdo = conectar();
         $sent = $pdo->prepare("SELECT COUNT(*)
@@ -66,7 +111,6 @@ function filtrar_codigo($codigo, &$error)
         }
     }
 }
-
 function filtrar_denominacion($denominacion, &$error)
 {
     $long = mb_strlen($denominacion);
@@ -78,6 +122,7 @@ function filtrar_denominacion($denominacion, &$error)
         );
     }
 }
+*/
 
 function insertar_error($campo, $mensaje, &$error)
 {
