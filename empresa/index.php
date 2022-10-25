@@ -64,7 +64,7 @@
     $sent = $pdo->prepare("SELECT COUNT(*) FROM departamentos $where");
     $sent->execute($execute);
     $total = $sent->fetchColumn();
-    $sent = $pdo->prepare("SELECT * FROM departamentos $where ORDER BY codigo");
+    $sent = $pdo->prepare("SELECT * FROM departamentos JOIN empleados ON empleados.departamento_id = departamentos.id $where ORDER BY codigo");
     $sent->execute($execute);
     $pdo->commit();
     ?>
@@ -72,8 +72,12 @@
     <div>
         <table style="margin: auto" border="1">
             <thead>
-                <th>Código</th>
+                <th>Código Departamento</th>
                 <th>Denominación</th>
+                <th>Numero empleado</th>
+                <th>Nombre empleado</th>
+                <th>Salario</th>
+                <th>Fecha de Nacimiento</th>
                 <th colspan="2">Acciones</th>
             </thead>
             <tbody>
@@ -81,6 +85,10 @@
                     <tr>
                         <td><?= $fila['codigo'] ?></td>
                         <td><?= $fila['denominacion'] ?></td>
+                        <td><?= $fila['numero'] ?></td>
+                        <td><?= $fila['nombre'] ?></td>
+                        <td><?= $fila['salario'] . "€" ?></td>
+                        <td><?= $fila['fecha_nac'] ?></td>
                         <td><a href="confirmar_borrado.php?id=<?= $fila['id'] ?>">Borrar</a></td>
                         <td><a href="modificar.php?id=<?= $fila['id'] ?>">Modificar</a></td>
                     </tr>

@@ -400,5 +400,16 @@ filter_input
 
 # LUNES 24 DE OCTUBRE
 - modificar.php 
-* cambiar el set: update de las columnas que realmente hayan cambiado. Por ejemplo, si solo se modifica los valores de codigo, solo se modificia codigo.
+* cambiar el set: update de las columnas que realmente hayan cambiado. 
+  Por ejemplo, si solo se modifica los valores de codigo, solo se modificia codigo.
 * obtener codigo - refactorizar
+
+# MARTE
+
+* sudo apt purge postgresql-14 
+* sudo nano /etc/postgresql/15/main/postgresql.conf
+  * busca 'PORT' y tienes que poner el valor "5432".
+* sudo systemctl restart postgresql.service
+* sudo -u postgres createuser -P empresa
+* sudo -u postgres createdb -O empresa empresa
+
