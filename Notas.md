@@ -404,7 +404,7 @@ filter_input
   Por ejemplo, si solo se modifica los valores de codigo, solo se modificia codigo.
 * obtener codigo - refactorizar
 
-# MARTE
+# MARTES 25 DE OCTUBRE
 
 * sudo apt purge postgresql-14 
 * sudo nano /etc/postgresql/15/main/postgresql.conf
@@ -412,4 +412,26 @@ filter_input
 * sudo systemctl restart postgresql.service
 * sudo -u postgres createuser -P empresa
 * sudo -u postgres createdb -O empresa empresa
+
+# JUEVES 27 DE OCTUBRE 
+
+* Rutas relativas: Al principio la usaremos, pero más adelante la cambiaremos por absolutas. Seguramente cuando pasemos a Laravel.
+
+* INTLDATEFORMATTER -- DAR FORMATO A LA FECHA
+  * $df = new ItlDateFormatter('es_ES',
+         IntlDateFormatter::LONG,
+         IntlDateFormatter::NONE,
+         'Europe/Madrid'
+         );
+
+  * DateTime::createFromFormat(
+                            FMT_FECHA,
+                            $fila['fecha_nac'],
+                            new DateTimeZone('Europe/Madrid')
+                        )->format('d-m-Y')
+
+
+* NUMBERFORMATTER -- DAR FORMATO AL DINERO
+  * $nf = new NumberFormatter("es_ES", NUMBERFORMATTER::CURRENCY);
+  * $nf->format(1245) --> 1.245.00€
 
