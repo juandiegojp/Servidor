@@ -1,21 +1,18 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Departamentos</title>
+    <title>Empleados</title>
 </head>
-
 <body>
     <?php
     require 'auxiliar.php';
 
-    $desde_codigo = obtener_get('desde_codigo');
-    $hasta_codigo = obtener_get('hasta_codigo');
-    $denominacion = obtener_get('denominacion');
+    const FMT_FECHA = 'Y-m-d H:i:s';
     ?>
+    <!--
     <div>
         <form action="" method="get">
             <fieldset>
@@ -42,10 +39,12 @@
             </fieldset>
         </form>
     </div>
+    -->
     <?php
     $pdo = conectar();
     $pdo->beginTransaction();
-    $pdo->exec('LOCK TABLE departamentos IN SHARE MODE');
+    $pdo->exec('LOCK TABLE empleados IN SHARE MODE');
+    /*
     $where = [];
     $execute = [];
     if (isset($desde_codigo) && $desde_codigo != '') {
@@ -61,34 +60,54 @@
         $execute[':denominacion'] = "%$denominacion%";
     }
     $where = !empty($where) ? 'WHERE ' . implode(' AND ', $where) : '';
-    $sent = $pdo->prepare("SELECT COUNT(*) FROM departamentos $where");
+    */
+    $where = '';
+    $execute = [];
+    $sent = $pdo->prepare("SELECT COUNT(*)
+                             FROM empleados e JOIN departamentos d
+                               ON e.departamento_id = d.id
+                           $where");
     $sent->execute($execute);
     $total = $sent->fetchColumn();
-    $sent = $pdo->prepare("SELECT * FROM departamentos JOIN empleados ON empleados.departamento_id = departamentos.id $where ORDER BY codigo");
+    $sent = $pdo->prepare("SELECT e.*, denominacion
+                             FROM empleados e JOIN departamentos d
+                               ON e.departamento_id = d.id
+                           $where
+                         ORDER BY numero");
     $sent->execute($execute);
     $pdo->commit();
+    $nf = new NumberFormatter('es_ES', NumberFormatter::CURRENCY);
+    // $df = new IntlDateFormatter(
+    //     'es_ES',
+    //     IntlDateFormatter::LONG,
+    //     IntlDateFormatter::NONE,
+    //     'Europe/Madrid'
+    // );
+    cabecera();
     ?>
     <br>
     <div>
         <table style="margin: auto" border="1">
             <thead>
-                <th>Código Departamento</th>
-                <th>Denominación</th>
-                <th>Numero empleado</th>
-                <th>Nombre empleado</th>
+                <th>Número</th>
+                <th>Nombre</th>
                 <th>Salario</th>
-                <th>Fecha de Nacimiento</th>
+                <th>Fecha de nac.</th>
+                <th>Departamento</th>
                 <th colspan="2">Acciones</th>
             </thead>
             <tbody>
-                <?php foreach ($sent as $fila) : ?>
+                <?php foreach ($sent as $fila): ?>
                     <tr>
-                        <td><?= $fila['codigo'] ?></td>
-                        <td><?= $fila['denominacion'] ?></td>
                         <td><?= $fila['numero'] ?></td>
-                        <td><?= $fila['nombre'] ?></td>
-                        <td><?= $fila['salario'] . "€" ?></td>
-                        <td><?= $fila['fecha_nac'] ?></td>
+                        <td><?= mb_substr($fila['nombre'], 0, 30) ?></td>
+                        <td><?= $nf->format($fila['salario']) ?></td>
+                        <td><?= DateTime::createFromFormat(
+                            FMT_FECHA,
+                            $fila['fecha_nac'],
+                            new DateTimeZone('Europe/Madrid')
+                        )->format('d-m-Y') ?></td>
+                        <td><?= mb_substr($fila['denominacion'], 0, 30) ?></td>
                         <td><a href="confirmar_borrado.php?id=<?= $fila['id'] ?>">Borrar</a></td>
                         <td><a href="modificar.php?id=<?= $fila['id'] ?>">Modificar</a></td>
                     </tr>
@@ -96,8 +115,7 @@
             </tbody>
         </table>
         <p>Número total de filas: <?= $total ?></p>
-        <a href="insertar_departamento.php">Insertar un nuevo departamento</a>
+        <a href="insertar.php">Insertar un nuevo empleado</a>
     </div>
 </body>
-
 </html>

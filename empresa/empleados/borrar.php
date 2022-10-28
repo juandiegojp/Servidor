@@ -11,6 +11,6 @@ if (!isset($id)) {
 // TODO: Validar id
 
 $pdo = conectar();
-$sent = $pdo->prepare("DELETE FROM departamentos WHERE id = :id");
+$sent = $pdo->prepare("DELETE FROM empleados WHERE id = :id");
 $sent->execute([':id' => $id]);
 volver();
