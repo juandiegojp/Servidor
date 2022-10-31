@@ -444,3 +444,11 @@ filter_input
 validar por ejemplo la entrada de datos del salario o la fecha.
 * 
 
+# LUNES 31 DE OCTUBRE
+
+Seguridad:
+- INYECCIÓN DE CÓDIGO SQL
+- CROSS-SITE SCRIPTING (xss)
+  - persistente
+  - no persistente
+

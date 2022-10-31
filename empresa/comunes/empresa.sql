@@ -22,5 +22,5 @@ INSERT INTO departamentos (codigo, denominacion)
     VALUES (10, 'Informática'), (20, 'Administrativo'), (30, 'Prevención'), (40, 'Laboratorio'), (50, 'Automoción');
 
 INSERT INTO empleados (numero, nombre, salario, fecha_nac, departamento_id)
-    VALUES (1000, 'Pepito', 1240, '1982-07-05', 1), (2000, 'María', 2035, '1999-01-01', 4);
+    VALUES (1000, 'Pepito', 1240, '1982-07-05', 1), (2000, 'María', 2035, '1999-01-01', 4), (3000, 'Pepito', 1240, '1982-07-05', 1), (4000, 'María', 2035, '1999-01-01', 4), (5000, 'Pepito', 1240, '1982-07-05', 2), (6000, 'María', 2035, '1999-01-01', 5);
 
