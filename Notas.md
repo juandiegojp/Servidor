@@ -435,3 +435,12 @@ filter_input
   * $nf = new NumberFormatter("es_ES", NUMBERFORMATTER::CURRENCY);
   * $nf->format(1245) --> 1.245.00€
 
+
+# VIERNES 28 DE OCTUBRE 
+
+* preg_match
+* checkdate
+* Habría que echarle un ojo a las expresiones regulares. Es interesante saberlo para el tema de
+validar por ejemplo la entrada de datos del salario o la fecha.
+* 
+
