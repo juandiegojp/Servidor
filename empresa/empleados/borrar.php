@@ -1,5 +1,4 @@
 <?php
-
 require 'auxiliar.php';
 
 $id = obtener_post('id');

@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Empleados</title>
 </head>
+
 <body>
     <?php
     require 'auxiliar.php';
@@ -97,16 +99,16 @@
                 <th colspan="2">Acciones</th>
             </thead>
             <tbody>
-                <?php foreach ($sent as $fila): ?>
+                <?php foreach ($sent as $fila) : ?>
                     <tr>
                         <td><?= $fila['numero'] ?></td>
                         <td><?= mb_substr($fila['nombre'], 0, 30) ?></td>
                         <td><?= $nf->format($fila['salario']) ?></td>
                         <td><?= DateTime::createFromFormat(
-                            FMT_FECHA,
-                            $fila['fecha_nac'],
-                            new DateTimeZone('Europe/Madrid')
-                        )->format('d-m-Y') ?></td>
+                                FMT_FECHA,
+                                $fila['fecha_nac'],
+                                new DateTimeZone('Europe/Madrid')
+                            )->format('d-m-Y') ?></td>
                         <td><?= mb_substr($fila['denominacion'], 0, 30) ?></td>
                         <td><a href="confirmar_borrado.php?id=<?= $fila['id'] ?>">Borrar</a></td>
                         <td><a href="modificar.php?id=<?= $fila['id'] ?>">Modificar</a></td>
@@ -118,4 +120,5 @@
         <a href="insertar.php">Insertar un nuevo empleado</a>
     </div>
 </body>
+
 </html>
