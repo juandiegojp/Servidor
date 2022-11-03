@@ -178,3 +178,8 @@ function mostrar_errores($campo, $error)
         {
             return $a == $b ? 'selected' : '';
         }
+
+        function hh($x)
+        {
+            return htmlspecialchars($x ?? '', ENT_QUOTES | ENT_SUBSTITUTE);
+        }
