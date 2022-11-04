@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -17,6 +18,12 @@
     $denominacion = obtener_get('denominacion');
 
     cabecera();
+
+    if (isset($_SESSION['mensaje'])) {
+        echo $_SESSION['mensaje'];
+        unset($_SESSION['mensaje']);
+    }
+
     ?>
     <div>
         <form action="" method="get">
@@ -92,6 +99,7 @@
         <p>Número total de filas: <?= hh($total) ?></p>
         <a href="insertar.php">Insertar un nuevo departamento</a>
     </div>
+    <?php pie() ?>
 </body>
 
 </html>

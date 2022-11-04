@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -15,7 +16,7 @@
     $id = obtener_get('id');
 
     if (!isset($id)) {
-        return volver();
+        return volver_principal();
     }
 
     try {
@@ -41,7 +42,7 @@
             ':denominacion' => $denominacion,
             ':id' => $id,
         ]);
-        return volver();
+        return volver_principal();
     } catch (Exception $e) {
         $pdo = conectar();
         $sent = $pdo->prepare("SELECT codigo, denominacion
@@ -51,7 +52,7 @@
         $fila = $sent->fetch();
 
         if (empty($fila)) {
-            return volver();
+            return volver_principal();
         }
         extract($fila);
     }

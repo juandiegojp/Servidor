@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -45,7 +46,7 @@
         validar_departamento_id($departamento_id, $error);
         if (!hay_errores($error)) {
             insertar_empleado($par, $pdo);
-            return volver();
+            return volver_principal();
         }
     }
 
