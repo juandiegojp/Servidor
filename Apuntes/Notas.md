@@ -452,3 +452,13 @@ Seguridad:
   - persistente
   - no persistente
 
+
+# VIERNES 4 DE OCTUBRE
+
+- Hemos estado creando cookies y trabajando con sesiones.
+- Crear tokens para las sesiones, estas pueden tener una duración determinada si así lo
+deseamos. Se generan de forma totalmente aleatoria con la función bin2hex(openssl_random_pseudo_bytes(32))
+- He trabajado y conseguido hacer los group by.
+
+![GROUP BY. Número de empleados que existen en cada departamento.](img/groupby.png)
+
