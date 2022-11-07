@@ -29,19 +29,12 @@ CREATE TABLE lectores (
     localidad varchar(255) NOT NULL
 );
 
-
 -- Fixtures:
 INSERT INTO libros (titulo, fecha_lanzamiento, autor, categoria, editorial)
-    VALUES ('Las Crónicas de Narnia', '1997-10-01', 'C. S. Lewis', 'Fantasía', 'Salamandra'),
-            ('Dune', '1965-01-06', 'Frank Herbert', 'Ciencia-Ficción', 'DeBolsillo'),
-            ('Harry Potter', '1993-08-22', 'JK Rowling', 'Fantasía', 'Salamandra');
+    VALUES ('Las Crónicas de Narnia', '1997-10-01', 'C. S. Lewis', 'Fantasía', 'Salamandra'), ('Dune', '1965-01-06', 'Frank Herbert', 'Ciencia-Ficción', 'DeBolsillo'), ('Harry Potter', '1993-08-22', 'JK Rowling', 'Fantasía', 'Salamandra');
 
 INSERT INTO alquileres (id_lector, id_libro, fecha_salida, fecha_entrada)
-    VALUES (1, 2, '2017-08-22', '2017-09-10'), 
-    (2, 1, '2017-08-22', '2017-09-10'), 
-    (1, 1, '2018-01-16', '2018-02-10');
+    VALUES (1, 2, '2017-08-22', '2017-09-10'), (2, 1, '2017-08-22', '2017-09-10'), (1, 1, '2018-01-16', '2018-02-10');
 
 INSERT INTO lectores (nombre, dni, tfl, localidad)
-    VALUES ('Juan', '20073238B', 622199719, 'Chipiona'),
-    ('Diego', '20073237X', 622199520, 'Sanlúcar'),
-    ('Amelia', '20073236C', 627646174, 'Jerez')
+    VALUES ('Juan', '20073238B', 622199719, 'Chipiona'), ('Diego', '20073237X', 622199520, 'Sanlúcar'), ('Amelia', '20073236C', 627646174, 'Jerez');
